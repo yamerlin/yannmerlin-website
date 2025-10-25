@@ -7,17 +7,41 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    env:
+      # SSH Secrets
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+      # Paths
+      LOCAL_BUILD_PATH: 'dist/yannmerlin-website/'
+      REMOTE_DEPLOY_PATH: '/home/yannmerlin'
+
     steps:
-      - name: Say hello
-        run: echo "Hello, World!"
 
       - name: Checkout Repository
         uses: actions/checkout@v5
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install
 
-    
+      - name: Build Angular
+        run: npm run build -- --configuration=production
+
+      # Copies built files to the VPS using SCP
+      - name: Deploy
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ env.SSH_HOST }}
+          username: ${{ env.SSH_USER }}
+          port: ${{ env.SSH_PORT }}
+          key: ${{ env.SSH_PRIVATE_KEY }}
+          source: ${{ env.LOCAL_BUILD_PATH }}
+          target: ${{ env.REMOTE_DEPLOY_PATH }}
