@@ -1,0 +1,11 @@
+app-header-nav {
+    position: sticky;
+    top: 5px;
+}
+
+
+.section {
+    margin: 20px;
+    scroll-snap-align: start;
+    scroll-margin-top: 79px;
+}

@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: "IBMPlex";
+    src: url("../public/font/IBMPlex/IBMPlexMono-Text.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBMPlex";
+    src: url("../public/font/IBMPlex/IBMPlexMono-TextItalic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "IBMPlex";
+    src: url("../public/font/IBMPlex/IBMPlexMono-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBMPlex";
+    src: url("../public/font/IBMPlex/IBMPlexMono-BoldItalic.woff2") format("woff2");
+    font-weight: bold;
+    font-style: italic;
+}
+
+:root {
+    --background-color: #EEEEEE;
+    --primary-color: #444;
+    --secondary-color: #D72638;
+    --tertiary-color: #5BAEAE;
+    --font: 'IBMPlex', monospace;
+}
+
+// Light theme
+.light{
+    --background-color: #EEEEEE;
+    --primary-color: #444;
+}
+
+// Dark theme
+.dark {
+    --background-color: #444;
+    --primary-color: #EEEEEE;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-family: var(--font);
+}
+
+button {
+    background: none;
+    border: var(--primary-color) 1px solid;
+    color: var(--primary-color);
+    cursor: pointer;
+    
+    display: flex;
+    align-items: center;
+
+    :hover {
+        scale: 1.3;
+    }
+}
