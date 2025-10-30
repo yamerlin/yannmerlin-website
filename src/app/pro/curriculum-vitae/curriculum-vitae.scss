@@ -13,6 +13,10 @@ h2 {
     border-bottom: 2px dashed var(--secondary-color);
 }
 
+h3 {
+    margin-top: 0;
+}
+
 .whoami-container {
     display: flex;
     flex-direction: row;
@@ -65,4 +69,42 @@ h2 {
             margin: 10px;
         }
     }
+}
+
+.timeline-container {
+    z-index: -1;
+    position: relative;
+    overflow: hidden;
+    margin-left: 50px;
+}
+
+// Line in the timeline
+.timeline-container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    margin-left: 6px;
+    width: 4px;
+    height: 100%;
+    background: var(--secondary-color);
+    z-index: -1;
+}
+
+.timeline-block {
+    display: flex;
+    flex-direction: row;
+    align-items:start;
+}
+
+// Marker in the timeline (circle)
+.marker {
+    margin-top: 5px;
+    min-width: 16px;
+    min-height: 16px;
+    border-radius: 50%;
+    background: var(--tertiary-color);
+}
+
+.timeline-content {
+    padding-left: 10px;
 }
