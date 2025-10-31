@@ -20,4 +20,14 @@ export class HeaderNav {
   isDarkMode(): boolean {
     return this.themeService.getCurrentTheme() === 'dark';
   }
+
+  toggleMenu() {
+    var nav = document.getElementById('nav-list');
+    if (nav && nav.style.display === 'flex') {
+      nav.style.display = 'none';
+    }
+    else if (nav) {
+      nav.style.display = 'flex';
+    }
+  }
 }

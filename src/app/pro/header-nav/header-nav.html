@@ -1,4 +1,4 @@
-<div class="header-container">
+<div class="header-banner">
     
     <a href="#whoami">Whoami</a>
     <a href="#employment-history">Employment history</a>
@@ -10,4 +10,25 @@
         <i class="material-icons">{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</i>
     </button>
 
+</div>
+
+<div class="header-button">
+    <button (click)="toggleMenu()">
+        <i class="material-icons">menu</i>
+    </button>
+
+    <div id="nav-list" class="nav-list">
+        <ul>
+            <li><a href="#whoami" (click)="toggleMenu()">Whoami</a></li>
+            <li><a href="#employment-history" (click)="toggleMenu()">Employment history</a></li>
+            <li><a href="#education" (click)="toggleMenu()">Education</a></li>
+            <li><a href="#projects" (click)="toggleMenu()">Projects</a></li>
+            <li><a href="#hobbies" (click)="toggleMenu()">Hobbies & interests</a></li>
+            <li class="li-button">
+                <button class="theme-button" (click)="toggleTheme()">
+                    <i class="material-icons">{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</i>
+                </button>
+            </li>
+        </ul>
+    </div>
 </div>

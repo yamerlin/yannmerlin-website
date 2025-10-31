@@ -30,6 +30,7 @@
 
 :root {
     --background-color: #EEEEEE;
+    --secondary-background-color: #DDDDDD;
     --primary-color: #444;
     --secondary-color: #D72638;
     --tertiary-color: #5BAEAE;
@@ -39,12 +40,14 @@
 // Light theme
 .light{
     --background-color: #EEEEEE;
+    --secondary-background-color: #DDDDDD;
     --primary-color: #444;
 }
 
 // Dark theme
 .dark {
     --background-color: #444;
+    --secondary-background-color: #3D3D3D;
     --primary-color: #EEEEEE;
 }
 
