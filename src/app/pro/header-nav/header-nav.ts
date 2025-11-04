@@ -1,25 +1,15 @@
 import { Component } from '@angular/core';
-import { ThemeService } from '../../shared/services/theme.service';
+import { ThemeSwitcher } from '../../shared/components/theme-switcher/theme-switcher';
 
 @Component({
   selector: 'app-header-nav',
-  imports: [],
+  imports: [ThemeSwitcher],
   templateUrl: './header-nav.html',
   styleUrl: './header-nav.scss',
 })
 export class HeaderNav {
 
-  constructor(private themeService: ThemeService) {}
-
-  toggleTheme() {
-    console.log('Toggle theme clicked');
-
-    this.themeService.toggleTheme();
-  }
-
-  isDarkMode(): boolean {
-    return this.themeService.getCurrentTheme() === 'dark';
-  }
+  constructor() {}
 
   toggleMenu() {
     var nav = document.getElementById('nav-list');

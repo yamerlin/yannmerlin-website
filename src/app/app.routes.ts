@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { CurriculumVitae } from './pro/curriculum-vitae/curriculum-vitae';
+import { LinkedInLike } from './pro/projects/linked-in-like/linked-in-like';
 
 export const routes: Routes = [
     {
@@ -10,5 +11,12 @@ export const routes: Routes = [
     {
         path: 'curriculum-vitae',
         component: CurriculumVitae
+    },
+    
+    // Project routes ( ex /projects/linked-in-like )
+    {
+        path: 'projects/linked-in-like',
+        pathMatch: 'full',
+        component: LinkedInLike
     }
 ];
