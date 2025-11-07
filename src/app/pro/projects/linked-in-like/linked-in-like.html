@@ -1,9 +1,85 @@
 <app-project
     title="LinkedIn Like"
-    description="The goal of this web app is to centralize data about former students of a business school.
+    description="The goal of this web application is to centralize data about former students of a business school.
                Our client needed a simple and efficient way to keep in touch with their alumni, and help them network.
                Some of the implemented features include user profiles with work experience and education history, advanced profile search, and administration panels."
->
+    [technologies]="['Angular', 'TypeScript', 'Node.js', 'PostgreSQL', 'HTML', 'CSS', 'Java Spring Boot', 'JWT Tokens Authentication']"
+               >
 </app-project>
 
-<p>linked-in-like works!</p>
+<h3>The problem</h3>
+<p>
+Our client for this project is an alumni association that had the following problem :
+They have a platform called AlumForce which is a professional social network for former students of the school,
+listing their profiles to connect them, store their data, allow them to view other users' profiles, or access job offers.
+The problem is that AlumForce is a proprietary platform owned by another company
+and the Alumni association does not have control over it, and has no control over its functional evolution.
+They cannot choose the next developments of the application and are stuck if they want to add other types
+of data than those provided by the developers of AlumForce.
+This creates a strong dependence on the solution's publisher and limits the system's ability to adapt to
+the association's particular uses.
+The Alumni therefore wish, alongside their use of AlumForce, to have a web platform that they own,
+on which they have control, in order to customize it as much as possible and add data that cannot be entered on AlumForce.
+This is why CGI was commissioned to create this application.
+</p>
+
+<h3>Implemented features</h3>
+The following features were implemented :
+<ul>
+<li>The ability to regularly retrieve and update data from AlumForce using their API.</li>
+<li>The ability to add and modify data on each profile.</li>
+<li>The ability to perform multi-criteria searches on the list of alumni.</li>
+<li>The ability to efficiently and easily view alumni profiles.</li>
+<li>The ability to manage access rights to limit usage to certain staff members.</li>
+</ul>
+
+<h3>Constraints</h3>
+Some constraints were identified :
+<ul>
+<li>Existing data must not be duplicated or re-imported during each synchronization with AlumForce.</li>
+<li>Compliance with confidentiality and personal data protection standards (GDPR*).</li>
+<li>The application must be modular to easily accommodate new features in the future.</li>
+</ul>
+
+<h3>Technological choices</h3>
+<p>
+The choice of technologies focused on an architecture with Angular for the front-end and Spring Boot for the back-end,
+along with a PostgreSQL relational database.
+For the authentication system, we used JWT tokens.
+These technical choices meet the constraints of security, robustness, maintainability, and compatibility with CGI's internal environments.
+</p>
+
+<h3>My role in this project</h3>
+When I joined the project, the conceptual data model had already been developed.
+We were a team of 4 developers working on this application, using Agile methodologies to asign tasks.
+A task is essentially a feature to implement, so each task usually involves both front-end and back-end work.
+Here are some of the tasks I worked on :
+<ul>
+    <li>
+        Routing<br>
+        I set up the routing system for the Angular application, defining routes for different views and components.
+        I ensured that navigation between pages was smooth and that the URL structure was logical and user-friendly.
+        I aslo developed route guards to protect certain routes and ensure that only authorized users could access them.
+        For the user experience, I designed the following side menu to navigate through the application :
+
+        <img src="projects-images/linkedin-like/sidemenu.png" alt="Side menu of the LinkedIn Like application">
+    </li>
+    <li>
+        General layout and pages style<br>
+        I worked on the overall layout and styling of the application pages using CSS and Angular Material components.
+        For example, here is the profil page :
+        <img src="projects-images/linkedin-like/profilpage.png" alt="Profile page of the LinkedIn Like application">
+    </li>
+    <li>
+        In the back-end, I implemented several REST API endpoints to handle data retrieval and manipulation.
+    </li>
+</ul>
+
+<h3>Critique and conclusion</h3>
+<p>
+This project was a great opportunity to work on a full-stack web application using modern technologies.
+It was successfully deployed and is currently in use by the alumni association.
+However, there are areas for improvement, for example, we could have connected the application to the real LinkedIn API
+to fetch and update user data directly from LinkedIn profiles. This would have eased the data entry process for users.
+Overall, this project allowed me to enhance my skills in web development and work collaboratively in a team setting.
+</p>

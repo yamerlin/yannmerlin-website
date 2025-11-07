@@ -51,9 +51,9 @@
     --primary-color: #EEEEEE;
 }
 
-html {
-    scroll-snap-type: y mandatory;
-}
+// html {
+    
+// }
 
 body {
     background-color: var(--background-color);
@@ -83,6 +83,8 @@ button {
 
 p {
     line-height: 1.8;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 a:link, a:visited {

@@ -21,6 +21,7 @@ h3 {
 .whoami-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 20px;
 
     img {
@@ -114,6 +115,18 @@ h3 {
 //The last block does not need bottom padding
 .timeline-block:last-child .timeline-content {
     padding-bottom: 0;
+}
+
+.tech-badges-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 20px;
+
+    img {
+        width: 7%;
+    }
 }
 
 @media (max-width: 800px) {

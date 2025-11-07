@@ -10,4 +10,5 @@ import { ThemeSwitcher } from '../../shared/components/theme-switcher/theme-swit
 export class Project {
   title = input.required();
   description = input.required();
+  technologies = input.required<string[]>();
 }
