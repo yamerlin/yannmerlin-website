@@ -1,7 +1,112 @@
 <app-project
     title="AI Chatbot"
-    description=""
+    description="This is an internal web application for a client with a lot of factories. In this factories, machines sometimes
+                break down, and maintenance workers need to find the right documentation to fix them. This can be a long and tedious process.
+                The goal of this project is to develop an AI-powered chatbot that can assist in redacting and finding documentation.
+                I was involved in the DevOps side of this project, setting up CI/CD pipelines and managing the application architecture using Docker and Kubernetes."
     [technologies]="['.Net Core API','C#','Semantic Kernel','Docker','Kubernetes']"
-    date="From december 2023 to may 2024"
+    date="From December 2023 to May 2024"
     >
 </app-project>
+
+<h3>The problem</h3>
+<p>
+Our client is facing several issues. They have many production lines in their factories, each composed of numerous machines. 
+These machines are not infallible and experience breakdowns on a daily basis. To manage this, maintenance agents 
+are responsible for inspecting the lines and intervening on the broken machines to get them back up and running. 
+After each intervention, they record the encountered problem as well as the steps taken to resolve it in an Office365 
+tool that serves as their “database.”
+Most of the time, these reports, called OTs (“Ordres de Travail” in French → “Work Orders”), are written with little care 
+(maintenance agents try to be as quick as possible to remain efficient) and contain numerous spelling mistakes, 
+grammar errors, abbreviations, and are not always completely understandable or correctly structured. 
+The maintenance agents then reuse past OTs to find solutions to their current problems more quickly.
+They consult the entries to see if the problem has already been resolved by someone else and thus reuse the same solution.
+<br>
+<br>
+Due to the fact that these entries are not "clean" (spelling mistakes, grammar errors, abbreviations, duplicates, etc.) and 
+that there are no tools to perform a search, the consultation must be done manually, and the expected time savings
+turns into a waste of time as they have to go through the OTs one by one.
+In this large document, it also happens that recurring problems are duplicated, which adds to the confusion.
+Finally, since the factories are spread across different countries, a language barrier is created, and a French user will
+have difficulty consulting an OT written in Chinese, even though it may contain the solution to their problem.
+</p>
+
+<h3>Project goals</h3>
+<p>
+To address these issues, the client would like to develop an AI chatbot tool in which a maintenance agent can describe the problem,
+specify the machine, and receive in response the most probable causes of the breakdown and the actions to take to repair it.
+They also want to be able to consult the OTs on which the AI based its response. A feedback system, where the user can rate the quality of the response,
+is also requested, to allow the AI to continuously improve the relevance of its answers. 
+Finally, this chatbot must be multi-language and multi-factory to overcome the language barrier.
+</p>
+
+<h3>Technological choices and architecture</h3>
+<p>
+To meet those goals, the following architecture was designed for the application:
+
+ <img src="diagrams/goals_diagram.png">
+
+The solution includes a user interface in the form of a web page. This web page will be 
+built using the Angular framework, with HTML, CSS, and TypeScript.
+When the user submits a request, their question is sent via an HTTP call to a Python-based 
+AI developed by the team’s data scientist. This AI communicates with the database containing the cleaned work orders (= “cleaned OT").
+“Cleaned” means that the work orders have first been processed by a cleaning API that 
+corrects spelling mistakes, removes personal data (such as team or employee names, phone numbers), 
+and optionally replaces abbreviations with their full designations using a predefined mapping file.
+The cleaning API uses Azure OpenAI through the Semantic Kernel SDK and is connected to the 
+storage containing the raw work orders (the non-clean ones).
+Finally, the feedback API collects user ratings on the bot’s answers and directly updates the 
+database to increase or decrease the score of a given response.
+</p>
+
+<h3>My role in this project</h3>
+
+<p>
+First, I was involved in the back-end development of the cleaning API. I worked on integrating the Azure OpenAI
+model using the Semantic Kernel SDK, and I implemented the logic to process and clean the raw work orders.
+
+I was then involved in the DevOps side of this project.
+My role consisted of building the following architecture on the client’s Kubernetes cluster on their intranet:
+</p>
+<img src="diagrams/goals_diagram_kubernetes.png">
+<p>
+This architecture is entirely containerized, with each component (web interface, AI model, feedback API, cleaning and vectorization API)
+running in its own pod.
+Each pod has its own ingress to be reachable from the client’s intranet.
+The web interface’s ingress contains the URL that maintenance workers will use to access the chatbot.
+Any device with a browser and connected to the client’s network can use the chatbot.
+The cleaning and vectorization API is triggered by a Kubernetes job that runs automatically at regular intervals.
+I was responsible for writing the Dockerfiles for each component, creating the Kubernetes yaml deployment files,
+and setting up the necessary ingress configurations, as well as monitoring and maintaining the deployment to ensure its stability and performance.
+</p>
+<p>
+This architecture had to be available in three different environments: development, industrialization, and production :
+</p>
+<img src="diagrams/environments_diagram.png">
+<p>
+I organized it in two clusters and three namespaces. The development and industrialization environments are in the same cluster but in different namespaces,
+while the production environment is in a separate cluster, to ensure maximum security and isolation.
+</p>
+<p>
+Finally, I set up CI/CD pipelines using GitLab CI/CD to automate the build, test, and deployment processes for each component of the application.
+<img src="projects-images/ai-chatbot/deployments.png">
+
+</p>
+
+<h3>Critique and conclusion</h3>
+<p>
+Here is a screeshot of the final product :
+<img src="projects-images/ai-chatbot/interface.png">
+
+The main challenge of this project was to work with the Semantic Kernel SDK, which was a new technology at the time.
+When we started the project, version 1.0 was not yet available, and we were working with a beta version.
+This meant that there were no tutorials and little documentation available, as it was still being created,
+and almost no example programs could be found on the internet. Additionally, function names were constantly changing
+with each new version release, some were deprecated, and new ones were added, so we had to rewrite a large part of the code each time.
+With the release of version 1.0, and a lot of research and testing, things finally stabilized.
+Overall, this project allowed me to enhance my skills in DevOps practices, containerization, and orchestration using Docker and Kubernetes,
+and work collaboratively in a team setting to deliver a functional AI chatbot solution for the client.
+The final product successfully meets the requirements and provides a valuable tool for maintenance workers to quickly find solutions to machine breakdowns.
+However, there is still room for improvement, such as implementing a more advanced feedback system that allows the AI to learn and adapt based on user ratings.
+For me, this project was a great learning experience, and I am proud of the work we accomplished as a team.
+</p>
